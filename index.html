@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Calcula horário</title>
+</head>
+<body>
+  <main class="main">
+    <header>
+      Horário de retorno é calculado levando em conta 1h e 45 minutos de almoço
+    </header>
+    <section>
+      <section class="section">
+        <p>Horário de saída</p>
+        <input id="time" type="time">
+      </section>
+
+      <button onclick="calcularHorario()">
+        Calcular horário
+      </button>
+    </section>
+    <p id="hourEntrance"></p>
+  </main>
+</body>
+
+<script>
+  function calcularHorario() {
+    const exitHour = document.getElementById("time").value.split(":")
+    const hourEntrance = document.getElementById("time")
+    const timeCalculate = document.getElementById("hourEntrance")
+
+    if (exitHour.length === 1) {
+      window.alert("Você deve preencher o horário de saída")
+      return;
+    }
+
+    const dateByHour = new Date(Date.now()).setHours((exitHour[0] - 3) + 1)
+    const dateFinal = new Date(dateByHour).setMinutes(Number(exitHour[1]) + 45)
+
+    timeCalculate.innerText = `Você voltará para o almoço ás ${new Date(dateFinal).toISOString().substring(11, 16)}` 
+  }
+</script>
+</html>
